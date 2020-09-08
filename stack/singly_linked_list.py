@@ -10,9 +10,6 @@ class LinkedList:
         self.head = None
         self.tail = None
 
-    def add_to_head(self, value):
-        pass
-
     def add_to_tail(self, value):
         if not self.tail:
             new_tail = Node(value, None)
