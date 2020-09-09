@@ -71,12 +71,22 @@ class DoublyLinkedList:
     """
 
     def add_to_tail(self, value):
+        """
+        If there are no nodes, there is nothing to hold the next or previous values. If there is no head or tail, Add the node as the current head and tail
+        """
         new_tail = ListNode(value)
-        old_tail = self.tail
-        new_tail.prev = self.tail
-        self.tail.next = new_tail
-        self.tail = new_tail
-        self.length += 1
+        if not self.head:
+            self.head = new_tail
+            self.tail = new_tail
+            self.length += 1
+        else:
+            print(new_tail.value)
+            old_tail = self.tail
+            new_tail.prev = self.tail
+            self.tail = new_tail
+            self.tail.prev.next = self.tail
+            # self.tail.next = new_tail
+            self.length += 1
 
     """
     Removes the List's current tail node, making the 
@@ -85,7 +95,16 @@ class DoublyLinkedList:
     """
 
     def remove_from_tail(self):
-        pass
+        old_tail = self.tail
+        if self.tail == self.head:
+            self.tail = None
+            self.head = None
+            self.length -= 1
+        else:
+            self.tail.prev.next = None
+            self.tail = self.tail.prev
+            self.length -= 1
+        return old_tail.value
 
     """
     Removes the input node from its current spot in the 
@@ -93,7 +112,20 @@ class DoublyLinkedList:
     """
 
     def move_to_front(self, node):
-        pass
+        if node.prev and node.next:  # They both are present
+            node.prev.next = node.next
+            node.next.prev = node.prev
+            self.head.prev = node
+            node.next = self.head
+            node.prev = None
+            self.head = node
+        elif not node.next:
+            node.prev.next = None
+            self.tail = node.prev
+            self.head.prev = node
+            node.next = self.head
+            node.prev = None
+            self.head = node
 
     """
     Removes the input node from its current spot in the 
@@ -101,7 +133,20 @@ class DoublyLinkedList:
     """
 
     def move_to_end(self, node):
-        pass
+        if node.next and node.prev:
+            node.prev.prev = node.next
+            node.next.prev = node.prev
+            self.tail.next = node
+            node.next = None
+            node.prev = self.tail
+            self.tail = node
+        elif not node.prev:
+            node.next.prev = None
+            self.head = node.next
+            self.tail.next = node
+            node.next = None
+            node.prev = self.tail
+            self.tail = node
 
     """
     Deletes the input node from the List, preserving the 
