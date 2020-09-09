@@ -50,7 +50,19 @@ class DoublyLinkedList:
     """
 
     def remove_from_head(self):
-        pass
+        if not self.head:
+            return None
+        else:
+            old_head = self.head
+            if self.head.next:  # there is a head and a next node
+                self.head.next.prev = None
+                self.head = self.head.next
+                self.length -= 1
+            else:  # there is no next node
+                self.head = None
+                self.tail = None
+                self.length = 0
+            return old_head.value
 
     """
     Wraps the given value in a ListNode and inserts it 
