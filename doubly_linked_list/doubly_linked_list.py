@@ -85,7 +85,6 @@ class DoublyLinkedList:
             new_tail.prev = self.tail
             self.tail = new_tail
             self.tail.prev.next = self.tail
-            # self.tail.next = new_tail
             self.length += 1
 
     """
@@ -170,24 +169,6 @@ class DoublyLinkedList:
             self.tail = node.prev
             node.prev.next = None
             self.length -= 1
-        """
-        if node.prev and node.next: # There is a node on both sides
-            node.prev.next = node.next
-            node.next.prev = node.prev
-            length -= 1
-        elif not node.prev and not node.next: # There is node surrounding node
-            self.head = None
-            self.tail = None
-            length = 0
-        elif not node.prev:
-            self.head = node.next
-            node.next.prev = None
-            length -= 1
-        elif not node.next:
-            self.tail = node.prev
-            node.prev.next = None
-            length -= 1
-        """
 
     """
     Finds and returns the maximum value of all the nodes 
@@ -195,4 +176,44 @@ class DoublyLinkedList:
     """
 
     def get_max(self):
-        pass
+        """
+        current_max = 0
+        current_node = None
+        while(not current_node == self.tail):
+            if not current_node:
+                current_node = self.head
+            if not self.head and not self.tail:
+                return 0
+            if self.head == current_node and self.tail == current_node:
+                return current_node.value
+            if current_node.value > current_max:
+                current_max = current_node.value
+            current_node = current_node.next
+        return current_max
+        """
+        current_max = 0
+        current_node = self.head
+        print(f"Head: {self.head.value}")
+        while(current_node.next):
+            if current_node.value > current_max:
+                current_max = current_node.value
+            current_node = current_node.next
+        return current_max
+        # while(not current_node == self.tail):
+        #     if not current_node:
+        #         print(f"Creating node from head! {self.head.value}")
+        #         current_node = self.head
+        #     if not self.head and not self.tail:
+        #         print("This is a 0 bro.")
+        #         return 0
+        #     if self.head == current_node and self.tail == current_node:
+        #         print(f"Head: {self.head.value} Tail: {self.tail.value}")
+        #         print(
+        #             f"This is only one element, some kind of list. {current_node.value}")
+        #         return current_node.value
+        #     if current_node.value > current_max:
+        #         print(
+        #             f"{current_node.value} is greater than {current_max}. Updating current max.")
+        #         current_max = current_node.value
+        #     current_node = current_node.next
+        # return current_max
