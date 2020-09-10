@@ -68,14 +68,6 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self):
-        """
-        if self.left: # start with left child
-            self.left.in_order_print()
-        else:
-            print(self.value)
-            if self.right:
-                self.right.in_order_print()
-        """
         if self.left:  # start with left child
             self.left.in_order_print()
         print(self.value)
@@ -85,7 +77,25 @@ class BSTNode:
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self):
-        pass
+        """
+        waiting_nodes = Queue()
+        waiting_nodes.enqueue(self)
+        while(len(waiting_nodes) > 0):
+            current_node = waiting_nodes.dequeue()
+            if current_node.left:
+                waiting_nodes.enqueue()
+            if current_node.right:
+                waiting_nodes.enqueue()
+        """
+        waiting_nodes = Queue()
+        waiting_nodes.enqueue(self)
+        while(len(waiting_nodes) > 0):
+            current_node = waiting_nodes.dequeue()
+            print(current_node.value)
+            if current_node.left:
+                waiting_nodes.enqueue(current_node.left)
+            if current_node.right:
+                waiting_nodes.enqueue(current_node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
@@ -117,9 +127,9 @@ bst.insert(3)
 bst.insert(4)
 bst.insert(2)
 
-bst.in_order_print()
+# bst.in_order_print()
 
-# bst.bft_print()
+bst.bft_print()
 # bst.dft_print()
 
 # print("elegant methods")
