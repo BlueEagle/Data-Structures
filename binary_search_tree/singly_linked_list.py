@@ -20,6 +20,7 @@ class LinkedList:
             current_head = self.head
             self.head = new_node
             self.head.next = current_head
+        self.size += 1
 
     def add_to_tail(self, value):
         if not self.tail:
@@ -54,6 +55,7 @@ class LinkedList:
             current_tail = self.tail
             self.head = None
             self.tail = None
+            self.size -= 1
         else:
             current_tail = self.tail
             current_node = self.head
@@ -62,4 +64,5 @@ class LinkedList:
                     self.tail = current_node
                     current_node.next = None
                 current_node = current_node.next
+            self.size -= 1
         return current_tail.value

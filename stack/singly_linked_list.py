@@ -10,6 +10,18 @@ class LinkedList:
         self.head = None
         self.tail = None
 
+    def add_to_head(self, value):
+        if not self.head:
+            new_node = Node(value, None)
+            self.head = new_node
+            self.tail = new_node
+        else:
+            new_node = Node(value, None)
+            current_head = self.head
+            self.head = new_node
+            self.head.next = current_head
+        self.size += 1
+
     def add_to_tail(self, value):
         if not self.tail:
             new_tail = Node(value, None)
