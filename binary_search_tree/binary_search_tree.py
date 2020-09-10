@@ -10,6 +10,7 @@ This part of the project comprises two days:
    on the BSTNode class.
 """
 from queue import Queue
+from stack import Stack
 
 
 class BSTNode:
@@ -77,16 +78,6 @@ class BSTNode:
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self):
-        """
-        waiting_nodes = Queue()
-        waiting_nodes.enqueue(self)
-        while(len(waiting_nodes) > 0):
-            current_node = waiting_nodes.dequeue()
-            if current_node.left:
-                waiting_nodes.enqueue()
-            if current_node.right:
-                waiting_nodes.enqueue()
-        """
         waiting_nodes = Queue()
         waiting_nodes.enqueue(self)
         while(len(waiting_nodes) > 0):
@@ -100,7 +91,26 @@ class BSTNode:
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self):
-        pass
+        """
+        waiting_nodes = Stack()
+        waiting_nodes.push(self)
+        while(len(waiting_nodes) > 0):
+            current_node = waiting_nodes.pop()
+            print(current_node.value)
+            if current_node.right:
+                waiting_nodes.push(current_node.right)
+            if current_node.left:
+                waiting_nodes.push(current_node.left)
+        """
+        waiting_nodes = Stack()
+        waiting_nodes.push(self)
+        while(len(waiting_nodes) > 0):
+            current_node = waiting_nodes.pop()
+            print(current_node.value)
+            if current_node.right:
+                waiting_nodes.push(current_node.right)
+            if current_node.left:
+                waiting_nodes.push(current_node.left)
 
     # Stretch Goals -------------------------
     # Note: Research may be required
@@ -127,10 +137,8 @@ bst.insert(3)
 bst.insert(4)
 bst.insert(2)
 
-# bst.in_order_print()
-
 bst.bft_print()
-# bst.dft_print()
+bst.dft_print()
 
 # print("elegant methods")
 # print("pre order")
