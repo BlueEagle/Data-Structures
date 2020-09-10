@@ -52,16 +52,15 @@ class BSTNode:
             return self.value
         else:
             return self.right.get_max()
-        """
-        if not self.left:
-            return self.value
-        else:
-            return self.left.get_max()
-        """
 
     # Call the function `fn` on the value of each node
+
     def for_each(self, fn):  # TODAY
-        pass
+        fn(self.value)
+        if self.left:
+            self.left.for_each(fn)
+        if self.right:
+            self.right.for_each(fn)
 
     # Part 2 -----------------------
 

@@ -24,12 +24,8 @@ class BinarySearchTreeTests(unittest.TestCase):
 
     def test_contains(self):
         self.bst.insert(2)
-        print('root: ', self.bst.value)
         self.bst.insert(3)
-        print('left: ', self.bst.left.value)
-        print('left-right: ', self.bst.left.right.value)
         self.bst.insert(7)
-        print('right: ', self.bst.right.value)
         self.assertTrue(self.bst.contains(7))
         self.assertFalse(self.bst.contains(8))
 
