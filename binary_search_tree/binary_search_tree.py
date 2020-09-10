@@ -9,6 +9,8 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+
+
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -16,20 +18,40 @@ class BSTNode:
         self.right = None
 
     # Insert the given value into the tree
-    def insert(self, value):
-        pass
+    def insert(self, value):  # TODAY
+        if value < self.value:  # the value belongs on the left of the tree
+            if not self.left:
+                self.left = BSTNode(value)
+            else:
+                self.left.insert(value)
+        elif value >= self.value:  # the value belongs on the right of the tree
+            if not self.right:
+                self.right = BSTNode(value)
+            else:
+                self.right.insert(value)
 
     # Return True if the tree contains the value
     # False if it does not
-    def contains(self, target):
-        pass
+    def contains(self, target):  # TODAY
+        if self.value == target:  # the current node is on target
+            return True
+        elif target < self.value:  # the target belongs on the left branch
+            if not self.left:  # there exists no left branch
+                return False
+            else:
+                return self.left.contains(target)
+        elif target > self.value:  # the target belongs on the right branch
+            if not self.right:  # there exists no right branch
+                return False
+            else:
+                return self.right.contains(target)
 
     # Return the maximum value found in the tree
-    def get_max(self):
+    def get_max(self):  # TODAY
         pass
 
     # Call the function `fn` on the value of each node
-    def for_each(self, fn):
+    def for_each(self, fn):  # TODAY
         pass
 
     # Part 2 -----------------------
@@ -60,6 +82,7 @@ class BSTNode:
     def post_order_dft(self):
         pass
 
+
 """
 This code is necessary for testing the `print` methods
 """
@@ -73,13 +96,13 @@ bst.insert(3)
 bst.insert(4)
 bst.insert(2)
 
-bst.bft_print()
-bst.dft_print()
+# bst.bft_print()
+# bst.dft_print()
 
-print("elegant methods")
-print("pre order")
-bst.pre_order_dft()
-print("in order")
-bst.in_order_dft()
-print("post order")
-bst.post_order_dft()  
+# print("elegant methods")
+# print("pre order")
+# bst.pre_order_dft()
+# print("in order")
+# bst.in_order_dft()
+# print("post order")
+# bst.post_order_dft()
